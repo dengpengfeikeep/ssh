@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.baidu.ssh.domain">
+	<class name="ProductStock">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="amount" />
+		<property name="price" />
+		<property name="stockNumber" />
+
+		<many-to-one name="depot" column="depot_id" lazy="false" />
+		<many-to-one name="product" column="product_id" lazy="false" />
+	</class>
+</hibernate-mapping>

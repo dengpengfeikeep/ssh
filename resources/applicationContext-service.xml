@@ -1,0 +1,59 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="   http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context   http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/tx   http://www.springframework.org/schema/tx/spring-tx.xsd   http://www.springframework.org/schema/aop   http://www.springframework.org/schema/aop/spring-aop.xsd   ">
+
+
+	<!--配置Service -->
+	<bean id="employeeService" class="com.baidu.ssh.service.impl.EmployeeServiceImpl">
+		<property name="employeeDAO" ref="employeeDAO" />
+	</bean>
+
+	<bean id="departmentService" class="com.baidu.ssh.service.impl.DepartmentServiceImpl">
+		<property name="departmentDAO" ref="departmentDAO" />
+	</bean>
+
+	<bean id="permissionService" class="com.baidu.ssh.service.impl.PermissionServiceImpl">
+		<property name="permissionDAO" ref="permissionDAO" />
+	</bean>
+
+	<bean id="roleService" class="com.baidu.ssh.service.impl.RoleServiceImpl">
+		<property name="roleDAO" ref="roleDAO" />
+	</bean>
+
+	<bean id="catService" class="com.baidu.ssh.service.impl.CatServiceImpl">
+		<property name="catDAO" ref="catDAO" />
+	</bean>
+	<bean id="systemMenuService" class="com.baidu.ssh.service.impl.SystemMenuServiceImpl">
+		<property name="systemMenuDAO" ref="systemMenuDAO" />
+	</bean>
+	<bean id="brandService" class="com.baidu.ssh.service.impl.BrandServiceImpl">
+		<property name="brandDAO" ref="brandDAO" />
+	</bean>
+	<bean id="supplierService" class="com.baidu.ssh.service.impl.SupplierServiceImpl">
+		<property name="supplierDAO" ref="supplierDAO" />
+	</bean>
+	<bean id="productService" class="com.baidu.ssh.service.impl.ProductServiceImpl">
+		<property name="productDAO" ref="productDAO" />
+	</bean>
+	<bean id="orderBillService" class="com.baidu.ssh.service.impl.OrderBillServiceImpl">
+		<property name="orderBillDAO" ref="orderBillDAO" />
+	</bean>
+	<bean id="depotService" class="com.baidu.ssh.service.impl.DepotServiceImpl">
+		<property name="depotDAO" ref="depotDAO" />
+	</bean>
+	<bean id="stockIncomeBillService" class="com.baidu.ssh.service.impl.StockIncomeBillServiceImpl">
+		<property name="stockIncomeBillDAO" ref="stockIncomeBillDAO" />
+		<property name="productStockDAO" ref="productStockDAO" />
+	</bean>
+	<bean id="stockOutcomeBillService" class="com.baidu.ssh.service.impl.StockOutcomeBillServiceImpl">
+		<property name="stockOutcomeBillDAO" ref="stockOutcomeBillDAO" />
+		<property name="productStockDAO" ref="productStockDAO" />
+	</bean>
+	<bean id="productStockService" class="com.baidu.ssh.service.impl.ProductStockServiceImpl">
+		<property name="productStockDAO" ref="productStockDAO" />
+	</bean>
+	<bean id="clientService" class="com.baidu.ssh.service.impl.ClientServiceImpl">
+		<property name="clientDAO" ref="clientDAO" />
+	</bean>
+</beans>

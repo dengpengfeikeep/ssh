@@ -1,0 +1,56 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="   http://www.springframework.org/schema/beans    http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context   http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/tx   http://www.springframework.org/schema/tx/spring-tx.xsd   http://www.springframework.org/schema/aop   http://www.springframework.org/schema/aop/spring-aop.xsd   ">
+
+	<!--配置DAO -->
+	<bean id="employeeDAO" class="com.baidu.ssh.dao.impl.EmployeeDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="departmentDAO" class="com.baidu.ssh.dao.impl.DepartmentDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="permissionDAO" class="com.baidu.ssh.dao.impl.PermissionDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="roleDAO" class="com.baidu.ssh.dao.impl.RoleDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="catDAO" class="com.baidu.ssh.dao.impl.CatDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="systemMenuDAO" class="com.baidu.ssh.dao.impl.SystemMenuDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="brandDAO" class="com.baidu.ssh.dao.impl.BrandDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="supplierDAO" class="com.baidu.ssh.dao.impl.SupplierDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="productDAO" class="com.baidu.ssh.dao.impl.ProductDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="orderBillDAO" class="com.baidu.ssh.dao.impl.OrderBillDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="depotDAO" class="com.baidu.ssh.dao.impl.DepotDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="stockIncomeBillDAO" class="com.baidu.ssh.dao.impl.StockIncomeBillDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="stockOutcomeBillDAO" class="com.baidu.ssh.dao.impl.StockOutcomeBillDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="productStockDAO" class="com.baidu.ssh.dao.impl.ProductStockDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="clientDAO" class="com.baidu.ssh.dao.impl.ClientDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>

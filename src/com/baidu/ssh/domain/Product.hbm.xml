@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.baidu.ssh.domain">
+	<class name="Product" table="product">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="sn" />
+		<property name="name" />
+		<property name="costPrice" />
+		<property name="imagePath" />
+		<property name="salePrice" />
+		<property name="intro" />
+		<many-to-one name="brand" column="brand_id" lazy="false" />
+	</class>
+</hibernate-mapping>

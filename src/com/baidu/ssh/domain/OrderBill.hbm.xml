@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.baidu.ssh.domain">
+	<!--采购订单 -->
+	<class name="OrderBill">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="sn" />
+		<property name="vdate" />
+		<property name="status" />
+		<property name="totalAmount" />
+		<property name="totalNumber" />
+		<property name="auditTime" />
+		<property name="inputTime" />
+		<many-to-one name="inputUser" column="inputUser_id" lazy="false" />
+		<many-to-one name="auditor" column="auditor_id" lazy="false" />
+		<many-to-one name="supplier" column="supplier_id" lazy="false" />
+
+		<!-- 关联关系,让one方放弃关系维护,并且设置级联为all-delete-orphan -->
+		<bag name="items" inverse="true" cascade="all-delete-orphan">
+			<key column="bill_id" />
+			<one-to-many class="OrderBillItem" />
+		</bag>
+	</class>
+
+	<!--采购订单明细 -->
+	<class name="OrderBillItem">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="costPrice" />
+		<property name="number" />
+		<property name="amount" />
+		<property name="remark" />
+
+		<many-to-one name="product" column="product_id" lazy="false" />
+		<many-to-one name="bill" column="bill_id" lazy="false" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.baidu.ssh.domain">
+
+	<class name="Employee" table="employee">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<property name="age" />
+		<property name="password" />
+		<property name="email" />
+		<property name="admin" />
+		<many-to-one name="dept" column="dept_id" lazy="false" />
+		<bag name="roles" table="employee_role" lazy="false">
+			<key column="employee_id" />
+			<many-to-many class="Role" column="role_id" />
+		</bag>
+	</class>
+
+
+</hibernate-mapping>

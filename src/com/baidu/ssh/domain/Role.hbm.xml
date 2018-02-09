@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.baidu.ssh.domain">
+
+	<class name="Role" table="role">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="name" />
+		<property name="sn" />
+
+		<bag name="permissions" table="role_permission" lazy="false">
+			<key column="role_id" />
+			<many-to-many class="Permission" column="permission_id" />
+		</bag>
+
+		<bag name="menus" table="role_menu" lazy="false">
+			<key column="role_id" />
+			<many-to-many class="SystemMenu" column="systemMenu_id" />
+		</bag>
+	</class>
+
+
+</hibernate-mapping>

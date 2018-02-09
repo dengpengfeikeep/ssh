@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+
+
+	<!-- <constant name="struts.devMode" value="true" /> -->
+	<constant name="struts.ui.theme" value="simple" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+
+		<interceptors>
+			<!-- 登录检查拦截器 -->
+			<interceptor name="checkLogin"
+				class="com.baidu.ssh.web.interceptor.LoginInterceptor">
+			</interceptor>
+			<!--权限检查拦截器 -->
+			<interceptor name="permission"
+				class="com.baidu.ssh.web.interceptor.PermissionInterceptor">
+			</interceptor>
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="checkLogin" />
+				<interceptor-ref name="permission" />
+				<interceptor-ref name="store">
+					<param name="operationMode">AUTOMATIC</param>
+				</interceptor-ref>
+				<interceptor-ref name="paramsPrepareParamsStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<default-interceptor-ref name="myStack" />
+
+		<!-- 全局的结果视图 -->
+		<global-results>
+			<result name="login">login.jsp</result>
+			<result name="error">/WEB-INF/views/common/error.jsp</result>
+			<result name="nopermission">/WEB-INF/views/common/error.jsp
+			</result>
+		</global-results>
+
+		<!--全局的错误页面处理,异常处理 -->
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+
+		<action name="employee_*" class="employeeAction" method="{1}">
+			<result name="list">/WEB-INF/views/employee/list.jsp</result>
+			<result name="input">/WEB-INF/views/employee/input.jsp</result>
+			<result name="success" type="redirectAction">employee</result>
+		</action>
+
+		<action name="client_*" class="clientAction" method="{1}">
+			<result name="list">/WEB-INF/views/client/list.jsp</result>
+			<result name="input">/WEB-INF/views/client/input.jsp</result>
+			<result name="success" type="redirectAction">client</result>
+		</action>
+
+		<action name="depot_*" class="depotAction" method="{1}">
+			<result name="list">/WEB-INF/views/depot/list.jsp</result>
+			<result name="input">/WEB-INF/views/depot/input.jsp</result>
+			<result name="success" type="redirectAction">depot</result>
+		</action>
+
+		<action name="orderBill_*" class="orderBillAction" method="{1}">
+			<result name="list">/WEB-INF/views/orderBill/list.jsp</result>
+			<result name="input">/WEB-INF/views/orderBill/input.jsp</result>
+			<result name="show">/WEB-INF/views/orderBill/show.jsp</result>
+			<result name="success" type="redirectAction">orderBill</result>
+		</action>
+
+		<action name="stockIncomeBill_*" class="stockIncomeBillAction"
+			method="{1}">
+			<result name="list">/WEB-INF/views/stockIncomeBill/list.jsp</result>
+			<result name="input">/WEB-INF/views/stockIncomeBill/input.jsp</result>
+			<result name="show">/WEB-INF/views/stockIncomeBill/show.jsp</result>
+			<result name="success" type="redirectAction">stockIncomeBill</result>
+		</action>
+
+		<action name="stockOutcomeBill_*" class="stockOutcomeBillAction"
+			method="{1}">
+			<result name="list">/WEB-INF/views/stockOutcomeBill/list.jsp</result>
+			<result name="input">/WEB-INF/views/stockOutcomeBill/input.jsp
+			</result>
+			<result name="show">/WEB-INF/views/stockOutcomeBill/show.jsp</result>
+			<result name="success" type="redirectAction">stockOutcomeBill</result>
+		</action>
+
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="list">/WEB-INF/views/product/list.jsp</result>
+			<result name="input">/WEB-INF/views/product/input.jsp</result>
+			<result name="selectProductList">
+				/WEB-INF/views/product/selectProduct.jsp
+			</result>
+			<result name="success" type="redirectAction">product</result>
+		</action>
+
+		<action name="supplier_*" class="supplierAction" method="{1}">
+			<result name="list">/WEB-INF/views/supplier/list.jsp</result>
+			<result name="input">/WEB-INF/views/supplier/input.jsp</result>
+			<result name="success" type="redirectAction">supplier</result>
+		</action>
+
+		<action name="department_*" class="departmentAction" method="{1}">
+			<result name="list">/WEB-INF/views/department/list.jsp</result>
+			<result name="input">/WEB-INF/views/department/input.jsp</result>
+			<result name="success" type="redirectAction">department</result>
+		</action>
+
+		<action name="permission_*" class="permissionAction" method="{1}">
+			<result name="list">/WEB-INF/views/permission/list.jsp</result>
+			<result name="success" type="redirectAction">permission</result>
+		</action>
+
+		<action name="role_*" class="roleAction" method="{1}">
+			<result name="list">/WEB-INF/views/role/list.jsp</result>
+			<result name="input">/WEB-INF/views/role/input.jsp</result>
+			<result name="success" type="redirectAction">role</result>
+		</action>
+
+		<action name="brand_*" class="brandAction" method="{1}">
+			<result name="list">/WEB-INF/views/brand/list.jsp</result>
+			<result name="input">/WEB-INF/views/brand/input.jsp</result>
+			<result name="success" type="redirectAction">brand</result>
+		</action>
+
+		<action name="cat_*" class="catAction" method="{1}">
+			<result name="list">/WEB-INF/views/cat/list.jsp</result>
+			<result name="input">/WEB-INF/views/cat/input.jsp</result>
+			<result name="success" type="redirectAction">cat</result>
+		</action>
+
+		<action name="systemMenu_*" class="systemMenuAction" method="{1}">
+			<result name="list">/WEB-INF/views/systemMenu/list.jsp</result>
+			<result name="input">/WEB-INF/views/systemMenu/input.jsp</result>
+			<result name="success" type="redirectAction">
+				<param name="actionName">systemMenu</param>
+				<param name="qo.parentId">${qo.parentId}</param>
+			</result>
+		</action>
+
+		<action name="login" class="loginAction">
+			<interceptor-ref name="paramsPrepareParamsStack" />
+			<result name="success" type="redirectAction">main</result>
+		</action>
+		<!-- 这个Action不作任何事,只负责跳转 -->
+		<action name="main">
+			<result>/WEB-INF/views/common/main.jsp</result>
+		</action>
+
+	</package>
+
+
+
+</struts>

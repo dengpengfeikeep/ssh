@@ -1,0 +1,76 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		">
+
+	<!--使用注解注入,需要引入context命名空间 -->
+	<context:component-scan base-package="com.baidu.ssh" />
+
+	<!--动态代理 AOP -->
+	<aop:aspectj-autoproxy />
+
+
+	<!--配置占位符 -->
+	<context:property-placeholder location="classpath:db.properties" />
+	<!--配置数据源 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource ">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="filters" value="config,stat" />
+		<property name="connectionProperties" value="config.decrypt=true" />
+	</bean>
+
+	<!--配置sessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect org.hibernate.dialect.MySQL5Dialect
+				hibernate.show_sql=false
+				hibernate.hbm2ddl.auto update
+			</value>
+		</property>
+		<property name="mappingLocations" value="classpath:com/baidu/ssh/domain/*.hbm.xml" />
+	</bean>
+
+	<!--引入配置文件 -->
+	<import resource="classpath:applicationContext-action.xml" />
+	<import resource="classpath:applicationContext-service.xml" />
+	<import resource="classpath:applicationContext-action.xml" />
+
+	<!--配置事务管理器 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<tx:advice id="crudAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<tx:method name="list*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<aop:pointcut expression="execution(* com.baidu.ssh.service.*Service.*(..))"
+			id="crudPointCut" />
+		<aop:advisor advice-ref="crudAdvice" pointcut-ref="crudPointCut" />
+	</aop:config>
+
+
+</beans>
