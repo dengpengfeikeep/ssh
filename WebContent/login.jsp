@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>小码哥PSS（演示版）</title>
+<title>登录页面</title>
 <link href="${pageContext.request.contextPath }/style/login_css.css"
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
