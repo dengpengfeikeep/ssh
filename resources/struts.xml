@@ -59,6 +59,11 @@
 			<result name="success" type="redirectAction">client</result>
 		</action>
 
+		<action name="productStock_*" class="productStockAction"
+			method="{1}">
+			<result name="list">/WEB-INF/views/productStock/list.jsp</result>
+		</action>
+
 		<action name="depot_*" class="depotAction" method="{1}">
 			<result name="list">/WEB-INF/views/depot/list.jsp</result>
 			<result name="input">/WEB-INF/views/depot/input.jsp</result>

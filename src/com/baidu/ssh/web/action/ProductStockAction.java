@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import com.baidu.ssh.domain.ProductStock;
 import com.baidu.ssh.query.ProductStockQueryObject;
+import com.baidu.ssh.service.IBrandService;
+import com.baidu.ssh.service.IDepotService;
 import com.baidu.ssh.service.IProductStockService;
 import com.baidu.ssh.util.RequiredPermission;
 import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
@@ -19,6 +21,12 @@ public class ProductStockAction extends BaseAction {
 	@Setter
 	private IProductStockService productStockService;
 
+	@Setter
+	private IDepotService depotService;
+
+	@Setter
+	private IBrandService brandService;
+
 	@Getter
 	private ProductStock productStock = new ProductStock();
 
@@ -28,6 +36,8 @@ public class ProductStockAction extends BaseAction {
 	@RequiredPermission("库存列表")
 	@InputConfig(methodName = "input")
 	public String execute() throws Exception {
+		putContext("depots", depotService.list());
+		putContext("brands", brandService.list());
 		try {
 			putContext("pageResult", productStockService.query(qo));
 		} catch (Exception e) {
@@ -35,45 +45,5 @@ public class ProductStockAction extends BaseAction {
 			addActionError(e.getMessage());
 		}
 		return "list";
-	}
-
-	@RequiredPermission("库存编辑")
-	public String input() throws Exception {
-		if (productStock.getId() != null) {
-			productStock = productStockService.get(productStock.getId());
-		}
-		return "input";
-	}
-
-	@RequiredPermission("库存删除")
-	public String delete() throws Exception {
-		if (productStock.getId() != null) {
-			productStockService.delete(productStock.getId());
-			putContextText("删除成功!");
-		}
-		return "success";
-	}
-
-	@RequiredPermission("库存保存或更新")
-	public String saveOrUpdate() throws Exception {
-		try {
-			if (productStock.getId() == null) {
-				productStockService.save(productStock);
-				addActionMessage("保存成功!");
-			} else {
-				productStockService.update(productStock);
-				addActionMessage("更改成功!");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			addActionError(e.getMessage());
-		}
-		return "success";
-	}
-
-	public void prepareSaveOrUpdate() throws Exception {
-		if (productStock.getId() != null) {
-			productStock = productStockService.get(productStock.getId());
-		}
 	}
 }

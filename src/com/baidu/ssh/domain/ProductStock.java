@@ -2,7 +2,8 @@ package com.baidu.ssh.domain;
 
 import java.math.BigDecimal;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @ClassName ProductStock
@@ -11,7 +12,8 @@ import lombok.Data;
  * @Date 2018年2月9日 上午12:47:24
  * @version 1.0.0
  */
-@Data
+@Getter
+@Setter
 public class ProductStock extends BaseDomain {
 	private Product product;// 表示哪一个货品
 	private Depot depot;// 表示哪一个仓库

@@ -78,6 +78,8 @@
 	<bean id="productStockAction" class="com.baidu.ssh.web.action.ProductStockAction"
 		scope="prototype">
 		<property name="productStockService" ref="productStockService" />
+		<property name="depotService" ref="depotService" />
+		<property name="brandService" ref="brandService" />
 	</bean>
 	<bean id="clientAction" class="com.baidu.ssh.web.action.ClientAction"
 		scope="prototype">
