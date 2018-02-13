@@ -60,7 +60,8 @@
 		</action>
 
 		<action name="chart_*" class="chartAction" method="{1}">
-			<result name="list">/WEB-INF/views/charts/list.jsp</result>
+			<result name="orderCharts">/WEB-INF/views/charts/orderChart.jsp</result>
+			<result name="saleCharts">/WEB-INF/views/charts/saleChart.jsp</result>
 		</action>
 
 		<action name="productStock_*" class="productStockAction"

@@ -6,8 +6,10 @@ import lombok.Setter;
 
 import com.baidu.ssh.dao.IChartDAO;
 import com.baidu.ssh.query.ChartQueryObject;
+import com.baidu.ssh.query.SaleChartQueryObject;
 import com.baidu.ssh.service.IChartService;
 import com.baidu.ssh.vo.ChartVO;
+import com.baidu.ssh.vo.SaleChartVO;
 
 /**
  * @ClassName ChartSerbiceImpl
@@ -21,6 +23,11 @@ public class ChartSerbiceImpl implements IChartService {
 	private IChartDAO chartDAO;
 
 	public List<ChartVO> queryCharts(ChartQueryObject qo) {
+
+		return chartDAO.queryCharts(qo);
+	}
+
+	public List<SaleChartVO> querySaleCharts(SaleChartQueryObject qo) {
 
 		return chartDAO.queryCharts(qo);
 	}

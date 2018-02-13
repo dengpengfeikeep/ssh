@@ -3,7 +3,9 @@ package com.baidu.ssh.service;
 import java.util.List;
 
 import com.baidu.ssh.query.ChartQueryObject;
+import com.baidu.ssh.query.SaleChartQueryObject;
 import com.baidu.ssh.vo.ChartVO;
+import com.baidu.ssh.vo.SaleChartVO;
 
 /**
  * @ClassName IChartService
@@ -13,6 +15,8 @@ import com.baidu.ssh.vo.ChartVO;
  * @version 1.0.0
  */
 public interface IChartService {
-	List<ChartVO> queryCharts(ChartQueryObject qo);
+	List<ChartVO> queryCharts(ChartQueryObject qo);// 查询订货报表
+
+	List<SaleChartVO> querySaleCharts(SaleChartQueryObject qo);// 查询销售报表
 
 }

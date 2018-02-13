@@ -44,7 +44,7 @@
 		});
 	});
 </script>
-<title>WMS-订货列表</title>
+<title>WMS-订货报表</title>
 <style>
 .alt td {
 	background: black !important;

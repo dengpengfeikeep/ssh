@@ -1,13 +1,16 @@
 package com.baidu.ssh.service.impl;
 
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.List;
 
 import lombok.Setter;
 
 import com.baidu.ssh.dao.IProductStockDAO;
+import com.baidu.ssh.dao.ISaleAccountDAO;
 import com.baidu.ssh.dao.IStockOutcomeBillDAO;
 import com.baidu.ssh.domain.ProductStock;
+import com.baidu.ssh.domain.SaleAccount;
 import com.baidu.ssh.domain.StockOutcomeBill;
 import com.baidu.ssh.domain.StockOutcomeBillItem;
 import com.baidu.ssh.query.PageResult;
@@ -21,6 +24,9 @@ public class StockOutcomeBillServiceImpl implements IStockOutcomeBillService {
 
 	@Setter
 	private IProductStockDAO productStockDAO;
+
+	@Setter
+	private ISaleAccountDAO saleAccountDAO;
 
 	public void save(StockOutcomeBill bill) {
 		// 1.设置制单人和制单时间
@@ -109,8 +115,25 @@ public class StockOutcomeBillServiceImpl implements IStockOutcomeBillService {
 							.subtract(item.getNumber()));
 					productStockDAO.update(productStock);
 				}
+
+				// 审核完,就要出一张销售账单
+				SaleAccount sa = new SaleAccount();
+				sa.setVdate(outcomeBill.getVdate());
+				sa.setCostPrice(productStock.getPrice());
+				sa.setNumber(item.getNumber());
+				sa.setCostAmount(productStock.getPrice()
+						.multiply(item.getNumber())
+						.setScale(2, RoundingMode.HALF_UP));
+				sa.setSalePrice(item.getSalePrice());
+				sa.setSaleAmount(item.getAmount());
+				sa.setSaleman(outcomeBill.getInputUser());
+				sa.setProduct(item.getProduct());
+				sa.setClient(outcomeBill.getClient());
+
+				saleAccountDAO.save(sa);
 			}
 		}
 		stockOutcomeBillDAO.update(outcomeBill);
+
 	}
 }

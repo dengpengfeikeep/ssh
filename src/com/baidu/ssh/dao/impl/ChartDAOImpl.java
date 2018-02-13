@@ -10,8 +10,11 @@ import org.hibernate.SessionFactory;
 
 import com.baidu.ssh.dao.IChartDAO;
 import com.baidu.ssh.query.ChartQueryObject;
+import com.baidu.ssh.query.SaleChartQueryObject;
 import com.baidu.ssh.vo.ChartVO;
 import com.baidu.ssh.vo.OrderGroupByType;
+import com.baidu.ssh.vo.SaleChartVO;
+import com.baidu.ssh.vo.SaleGroupByType;
 
 /**
  * @ClassName ChartDAOImpl
@@ -26,7 +29,7 @@ public class ChartDAOImpl implements IChartDAO {
 	private SessionFactory sessionFactory;
 
 	/**
-	 *  查询表单
+	 *  订货报表查询
 	 */
 	@SuppressWarnings("unchecked")
 	public List<ChartVO> queryCharts(ChartQueryObject qo) {
@@ -48,6 +51,29 @@ public class ChartDAOImpl implements IChartDAO {
 		}
 		return query.list();
 
+	}
+
+	/**
+	 *   销售账表查询
+	 */
+	public List<SaleChartVO> queryCharts(SaleChartQueryObject qo) {
+		// 从qo对象中得到分组信息(employee,product..),并转成枚举类型
+		SaleGroupByType type = SaleGroupByType.valueOf(qo.getGroupType()
+				.toUpperCase());
+
+		Session session = sessionFactory.getCurrentSession();
+		StringBuilder hql = new StringBuilder(80);
+		hql.append("select new com.baidu.ssh.vo.SaleChartVO("
+				+ type.getGroupValue()
+				+ ",sum(obj.number),sum(obj.saleAmount),sum(obj.saleAmount-obj.costAmount)) from SaleAccount obj");
+		hql.append(qo.getQuery());
+		hql.append(" group by " + type.getGroupBy());
+		Query query = session.createQuery(hql.toString());
+		// 设置占位符参数
+		for (int index = 0; index < qo.getParameters().size(); index++) {
+			query.setParameter(index, qo.getParameters().get(index));
+		}
+		return query.list();
 	}
 
 }

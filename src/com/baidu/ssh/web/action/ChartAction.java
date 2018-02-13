@@ -4,10 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 import com.baidu.ssh.query.ChartQueryObject;
+import com.baidu.ssh.query.SaleChartQueryObject;
 import com.baidu.ssh.service.IBrandService;
 import com.baidu.ssh.service.IChartService;
+import com.baidu.ssh.service.IClientService;
 import com.baidu.ssh.service.ISupplierService;
 import com.baidu.ssh.vo.OrderGroupByType;
+import com.baidu.ssh.vo.SaleGroupByType;
 
 /**
  * @ClassName ChartAction
@@ -28,8 +31,12 @@ public class ChartAction extends BaseAction {
 	private IBrandService brandService;
 	@Setter
 	private IChartService chartService;
+	@Setter
+	private IClientService clientService;
 	@Getter
 	private ChartQueryObject oqo = new ChartQueryObject();
+	@Getter
+	private SaleChartQueryObject sqo = new SaleChartQueryObject();
 
 	public String orderChart() throws Exception {
 		try {
@@ -40,6 +47,18 @@ public class ChartAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "list";
+		return "orderCharts";
+	}
+
+	public String saleChart() throws Exception {
+		try {
+			putContext("clients", clientService.list());
+			putContext("brands", brandService.list());
+			putContext("saleGroupTypes", SaleGroupByType.values());// 把枚举传递到前台(一个数组)
+			putContext("saleCharts", chartService.querySaleCharts(sqo));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "saleCharts";
 	}
 }

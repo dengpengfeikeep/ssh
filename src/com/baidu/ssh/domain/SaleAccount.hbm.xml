@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.baidu.ssh.domain">
+	<class name="SaleAccount">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="vdate" />
+		<property name="costAmount" />
+		<property name="costPrice" />
+		<property name="number" />
+		<property name="saleAmount" />
+		<property name="salePrice" />
+
+		<many-to-one name="product" column="product_id" />
+		<many-to-one name="saleman" column="saleman_id" />
+		<many-to-one name="client" column="client_id" />
+	</class>
+</hibernate-mapping>

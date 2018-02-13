@@ -49,6 +49,7 @@
 	<bean id="stockOutcomeBillService" class="com.baidu.ssh.service.impl.StockOutcomeBillServiceImpl">
 		<property name="stockOutcomeBillDAO" ref="stockOutcomeBillDAO" />
 		<property name="productStockDAO" ref="productStockDAO" />
+		<property name="saleAccountDAO" ref="saleAccountDAO" />
 	</bean>
 	<bean id="productStockService" class="com.baidu.ssh.service.impl.ProductStockServiceImpl">
 		<property name="productStockDAO" ref="productStockDAO" />

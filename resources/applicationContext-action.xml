@@ -90,5 +90,6 @@
 		<property name="supplierService" ref="supplierService" />
 		<property name="brandService" ref="brandService" />
 		<property name="chartService" ref="chartService" />
+		<property name="clientService" ref="clientService" />
 	</bean>
 </beans>

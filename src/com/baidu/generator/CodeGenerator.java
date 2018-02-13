@@ -16,6 +16,7 @@ import com.baidu.ssh.domain.Depot;
 import com.baidu.ssh.domain.OrderBill;
 import com.baidu.ssh.domain.Product;
 import com.baidu.ssh.domain.ProductStock;
+import com.baidu.ssh.domain.SaleAccount;
 import com.baidu.ssh.domain.StockIncomeBill;
 import com.baidu.ssh.domain.Supplier;
 import com.baidu.ssh.domain.SystemMenu;
@@ -44,37 +45,37 @@ public class CodeGenerator {
 
 	private static void creat() throws Exception {
 		// DAO模板
-		ClassInfo classInfo = new ClassInfo(Client.class);
+		ClassInfo classInfo = new ClassInfo(SaleAccount.class);
 		creatFile(classInfo, "IDAO.java", "src/{0}/dao" + "/I{1}DAO.java");
 		// DAOImpl模板
 		creatFile(classInfo, "DAOImpl.java", "src/{0}/dao/impl"
 				+ "/{1}DAOImpl.java");
-		// service模板
+		/*// service模板
 		creatFile(classInfo, "IService.java", "src/{0}/service"
 				+ "/I{1}Service.java");
 		// serviceImpl模板
 		creatFile(classInfo, "ServiceImpl.java", "src/{0}/service/impl"
 				+ "/{1}ServiceImpl.java");
 		// 生成query对象
-		creatFile(classInfo, "QueryObject.java",
+		//creatFile(classInfo, "QueryObject.java",
 				"src/{0}/query/{1}QueryObject.java");
 		// 生成Action对象
-		creatFile(classInfo, "Action.java", "src/{0}/web/action/{1}Action.java");
+		//creatFile(classInfo, "Action.java", "src/{0}/web/action/{1}Action.java");
 		// 生成jsp文件
-		creatFile(classInfo, "list.jsp",
+		//creatFile(classInfo, "list.jsp",
 				"WebContent/WEB-INF/views/{2}/list.jsp");
-		creatFile(classInfo, "input.jsp",
-				"WebContent/WEB-INF/views/{2}/input.jsp");
+		//creatFile(classInfo, "input.jsp",
+				"WebContent/WEB-INF/views/{2}/input.jsp");*/
 		// 生成映射文件
 		creatFile(classInfo, "hbm.xml", "src/{0}/domain/{1}.hbm.xml");
 		System.out.println("生产完成");
 		// 追加配置文件
 		appendToXml(classInfo, "dao.xml",
 				"resources/applicationContext-dao.xml");
-		appendToXml(classInfo, "service.xml",
-				"resources/applicationContext-service.xml");
+		/*//appendToXml(classInfo, "service.xml",
+			//	"resources/applicationContext-service.xml");
 		appendToXml(classInfo, "action.xml",
-				"resources/applicationContext-action.xml");
+				"resources/applicationContext-action.xml");*/
 	}
 
 	@SuppressWarnings("all")
