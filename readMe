@@ -1,0 +1,4 @@
+一个mini版本的企业进销存系统
+DAO层用的是hibernate框架
+SERVICE层用的是spring框架
+ACTION层用的是struts2框架

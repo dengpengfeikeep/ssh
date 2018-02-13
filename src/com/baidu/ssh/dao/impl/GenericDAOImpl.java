@@ -82,6 +82,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
 		String countHql = "select count(obj) from "
 				+ targetType.getSimpleName() + " obj" + qo.getQuery();
 		Query query = session.createQuery(countHql);
+		// 设置占位符参数
 		for (int index = 0; index < qo.getParameters().size(); index++) {
 			query.setParameter(index, qo.getParameters().get(index));
 		}
@@ -95,6 +96,7 @@ public class GenericDAOImpl<T> implements IGenericDAO<T> {
 		String hql = "select obj from " + targetType.getSimpleName() + " obj"
 				+ qo.getQuery();
 		query = session.createQuery(hql);
+		// 设置占位符参数
 		for (int index = 0; index < qo.getParameters().size(); index++) {
 			query.setParameter(index, qo.getParameters().get(index));
 		}

@@ -20,19 +20,31 @@
 	src="${pageContext.request.contextPath }/js/artDialog/plugins/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("input[name='qo.productName']").attr("placeholder", "货品名称");
-		var v = $("input[name='qo.maxPrice']").val();
-		if (v < 0) {
-			$.dialog({
-				title : '操作提示',
-				icon : 'face-sad',
-				content : '阈值必须是正数',
-				cancel : true,
+		//加上My97Date控件
+		$("input[name='oqo.beginDate']").addClass("Wdate").click(function() {
+			WdatePicker({
+				//可选的选项
+				maxDate : $("input[name='oqo.endDate']").val() || new Date(),
 			});
-		}
+		});
+		$("input[name='oqo.endDate']").addClass("Wdate").click(function() {
+			WdatePicker({
+				//可选的选项
+				minDate : $("input[name='oqo.beginDate']").val(),
+				maxDate : new Date(),
+			});
+		});
+		//清空查询条件
+		$(".delete_query").click(function() {
+			$("input[name='oqo.beginDate']").val("");
+			$("input[name='oqo.endDate']").val("");
+			$(".productName").val("");
+			$(".supplier_id").val(-1);
+			$(".brand_id").val(-1);
+		});
 	});
 </script>
-<title>WMS-即时库存报表</title>
+<title>WMS-订货列表</title>
 <style>
 .alt td {
 	background: black !important;
@@ -43,7 +55,7 @@
 	<!--====================================-->
 	<%@include file="/WEB-INF/views/common/common_msg.jsp"%>
 	<!--====================================-->
-	<s:form id="searchForm" namespace="/" action="productStock"
+	<s:form id="searchForm" namespace="/" action="chart_orderChart"
 		method="post">
 		<div id="container">
 			<div class="ui_content">
@@ -51,22 +63,28 @@
 					<div id="box_border">
 						<div id="box_top">搜索</div>
 						<div id="box_center">
-							货品
-							<s:textfield name="qo.productName" cssClass="ui_select03" />
-							仓库
-							<s:select list="#depots" name="qo.depotId" listKey="id"
+							业务时间
+							<s:textfield name="oqo.beginDate" cssClass="ui_select03" />
+							<s:textfield name="oqo.endDate" cssClass="ui_select03" />
+							货品名称
+							<s:textfield name="oqo.productName"
+								cssClass="ui_select03 productName" />
+							供应商
+							<s:select list="#suppliers" name="oqo.supplierId" listKey="id"
 								listValue="name" headerKey="-1" headerValue="全部"
-								cssClass="ui_select03 " />
+								cssClass="ui_select03 supplier_id" />
 							品牌
-							<s:select list="#brands" name="qo.brandId" listKey="id"
+							<s:select list="#brands" name="oqo.brandId" listKey="id"
 								listValue="name" headerKey="-1" headerValue="全部"
-								cssClass="ui_select03 " />
-							阈值
-							<s:textfield name="qo.maxPrice" cssClass="ui_select03 " />
+								cssClass="ui_select03 brand_id" />
+							分组
+							<s:select list="#orderGroupTypes" name="oqo.groupType"
+								listKey="name()" listValue="groupType" cssClass="ui_select03 " />
 						</div>
 						<div id="box_bottom">
-							<input type="button" value="查询" class="ui_input_btn01 page_btn"
-								data-page="1" />
+							<input type="button" value="清空条件"
+								class="ui_input_btn01 delete_query" /> <input type="submit"
+								value="查询" class="ui_input_btn01 " />
 						</div>
 					</div>
 				</div>
@@ -77,35 +95,24 @@
 						align="center" border="0">
 						<tr>
 							<th width="30"><input type="checkbox" id="all" /></th>
-							<th>编号</th>
-							<th>货品</th>
-							<th>仓库</th>
-							<th>品牌</th>
-							<th>库存价格</th>
-							<th>库存数量</th>
-							<th>库存总金额</th>
+							<th>分组类型</th>
+							<th>订货数量</th>
+							<th>订货金额</th>
 							<th></th>
 						</tr>
 						<tbody>
-							<s:iterator value="#pageResult.result">
+							<s:iterator value="#orderCharts">
 								<tr>
 									<td><input type="checkbox" name="IDCheck"
-										autocomplete="off" class="acb"
-										data-eid="<s:property value="id"/>" /></td>
-									<td><s:property value="product.sn" /></td>
-									<td><s:property value="product.name" /></td>
-									<td><s:property value="depot.name" /></td>
-									<td><s:property value="product.brand.name" /></td>
-									<td><s:property value="price" /></td>
-									<td><s:property value="stockNumber" /></td>
-									<td><s:property value="amount" /></td>
+										autocomplete="off" /></td>
+									<td><s:property value="groupType" /></td>
+									<td><s:property value="totalNumber" /></td>
+									<td><s:property value="totalAmount" /></td>
 								</tr>
 							</s:iterator>
 						</tbody>
 					</table>
 				</div>
-				<!--引入分页条-->
-				<%@include file="/WEB-INF/views/common/common_page.jsp"%>
 			</div>
 		</div>
 	</s:form>

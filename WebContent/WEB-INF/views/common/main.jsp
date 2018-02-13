@@ -5,7 +5,7 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>小码哥PSS（演示版）</title>
+<title>PSS（演示版）</title>
 <link href="${pageContext.request.contextPath }/style/main_css.css"
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/style/zTreeStyle.css"

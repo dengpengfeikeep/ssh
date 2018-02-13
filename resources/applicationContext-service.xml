@@ -56,4 +56,7 @@
 	<bean id="clientService" class="com.baidu.ssh.service.impl.ClientServiceImpl">
 		<property name="clientDAO" ref="clientDAO" />
 	</bean>
+	<bean id="chartService" class="com.baidu.ssh.service.impl.ChartSerbiceImpl">
+		<property name="chartDAO" ref="chartDAO" />
+	</bean>
 </beans>

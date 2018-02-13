@@ -53,4 +53,7 @@
 	<bean id="clientDAO" class="com.baidu.ssh.dao.impl.ClientDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="chartDAO" class="com.baidu.ssh.dao.impl.ChartDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>

@@ -21,8 +21,8 @@
 				<div id="login_form">
 					<H2>出错啦！</H2>
 					<span>执行过程中发生了异常：</span> <span class="error"><s:property
-							value="exception.message" /></span> <span>请联系管理员解决！</span> <span>联系电话：020-29007520</span>
-					<span>联系邮件：service@520it.com</span> <span>&copy;广州小码哥教育科技有限公司</span>
+							value="exception.message" /></span> <span>请联系管理员解决！</span> <span>联系电话：XXX</span>
+					<span>联系邮件：XXX@XXX.com</span> <span>&copy;美国太空探索技术有限公司</span>
 				</div>
 			</div>
 		</div>

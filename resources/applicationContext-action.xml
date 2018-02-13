@@ -85,4 +85,10 @@
 		scope="prototype">
 		<property name="clientService" ref="clientService" />
 	</bean>
+	<bean id="chartAction" class="com.baidu.ssh.web.action.ChartAction"
+		scope="prototype">
+		<property name="supplierService" ref="supplierService" />
+		<property name="brandService" ref="brandService" />
+		<property name="chartService" ref="chartService" />
+	</bean>
 </beans>

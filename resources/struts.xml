@@ -59,6 +59,10 @@
 			<result name="success" type="redirectAction">client</result>
 		</action>
 
+		<action name="chart_*" class="chartAction" method="{1}">
+			<result name="list">/WEB-INF/views/charts/list.jsp</result>
+		</action>
+
 		<action name="productStock_*" class="productStockAction"
 			method="{1}">
 			<result name="list">/WEB-INF/views/productStock/list.jsp</result>
