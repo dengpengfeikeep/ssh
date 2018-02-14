@@ -62,6 +62,10 @@
 		<action name="chart_*" class="chartAction" method="{1}">
 			<result name="orderCharts">/WEB-INF/views/charts/orderChart.jsp</result>
 			<result name="saleCharts">/WEB-INF/views/charts/saleChart.jsp</result>
+			<result name="saleChartByLine">/WEB-INF/views/charts/saleChartByLine.jsp
+			</result>
+			<result name="saleChartByPie">/WEB-INF/views/charts/saleChartByPie.jsp
+			</result>
 		</action>
 
 		<action name="productStock_*" class="productStockAction"

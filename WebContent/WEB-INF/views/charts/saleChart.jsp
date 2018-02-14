@@ -42,6 +42,19 @@
 			$(".client_id").val(-1);
 			$(".brand_id").val(-1);
 		});
+		//选择查看线形图还是饼状图
+		$(".select_chart").change(
+				function() {
+					var msg = $(this).val();
+					if (msg == "line") {
+						$("#searchForm")
+								.prop("action", "chart_saleChartByLine")
+								.submit();
+					} else if (msg == "pie") {
+						$("#searchForm").prop("action", "chart_saleChartByPie")
+								.submit();
+					}
+				});
 	});
 </script>
 <title>WMS-销售报表</title>
@@ -80,6 +93,9 @@
 							分组
 							<s:select list="#saleGroupTypes" name="sqo.groupType"
 								listKey="name()" listValue="groupType" cssClass="ui_select03 " />
+							查看图表
+							<s:select list="#{'':'请选择','line':'线形图','pie':'饼状图'}" name="XX"
+								cssClass="ui_select03 select_chart" />
 						</div>
 						<div id="box_bottom">
 							<input type="button" value="清空条件"
