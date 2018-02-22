@@ -3,9 +3,6 @@ package com.baidu.ssh.web.action;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.struts2.ServletActionContext;
-import org.springframework.context.annotation.Scope;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -51,7 +48,6 @@ public class EmployeeAction extends BaseAction {
 		try {
 			putContext("pageResult", employeeService.query(qo));
 			putContext("depts", departmentService.list());
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			addActionError(e.getMessage());
@@ -61,11 +57,11 @@ public class EmployeeAction extends BaseAction {
 
 	// 批量删除
 	public String batchDelete() throws Exception {
-		if (ids.size() >= 0) {
+		System.out.println(ids);
+		if (ids.size() > 0) {
 			employeeService.batchDelete(ids);
 		}
 		return NONE;
-
 	}
 
 	// 删除界面

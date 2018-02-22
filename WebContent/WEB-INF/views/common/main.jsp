@@ -5,7 +5,7 @@
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>PSS（演示版）</title>
+<title>WMS</title>
 <link href="${pageContext.request.contextPath }/style/main_css.css"
 	rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/style/zTreeStyle.css"
@@ -20,19 +20,13 @@
 	src="${pageContext.request.contextPath }/js/system/index.js"></script>
 </head>
 <body>
-	<s:debug></s:debug>
 	<div id="top">
-		<div id="top_logo">
-			<img alt="logo"
-				src="${pageContext.request.contextPath }/images/common/logo.jpg"
-				width="274" height="49" style="vertical-align: middle;">
-		</div>
 		<div id="top_links">
 			<div id="top_op">
 				<ul>
 					<li><img alt="当前用户"
 						src="${pageContext.request.contextPath }/images/common/user.jpg">：
-						<span><s:property value="#" /></span></li>
+						<span>${sessionScope.user}</span></li>
 					<li><img alt="今天是"
 						src="${pageContext.request.contextPath }/images/common/date.jpg">：
 						<span id="day_day"></span></li>

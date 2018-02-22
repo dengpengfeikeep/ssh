@@ -53,6 +53,10 @@
 			<result name="success" type="redirectAction">employee</result>
 		</action>
 
+		<action name="logout_*" class="logoutAction" method="{1}">
+			<result name="success" type="redirectAction">login</result>
+		</action>
+
 		<action name="client_*" class="clientAction" method="{1}">
 			<result name="list">/WEB-INF/views/client/list.jsp</result>
 			<result name="input">/WEB-INF/views/client/input.jsp</result>

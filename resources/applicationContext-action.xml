@@ -17,6 +17,10 @@
 		<property name="departmentService" ref="departmentService" />
 	</bean>
 
+	<bean id="logoutAction" class="com.baidu.ssh.web.action.LogoutAction"
+		scope="prototype">
+	</bean>
+
 	<bean id="permissionAction" class="com.baidu.ssh.web.action.PermissionAction"
 		scope="prototype">
 		<property name="permissionService" ref="permissionService" />
